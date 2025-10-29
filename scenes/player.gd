@@ -16,6 +16,9 @@ const spriteXScale:=0.33
 var animating:=false
 
 
+func  _process(_delta: float) -> void:
+	$Flashlights.rotation=(Input.get_axis("look_up","look_down")*PI/4)
+
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("reset") and not animating:
 		respawn()
@@ -24,6 +27,8 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		#if $AnimatedSprite2D.frame==0 or jumpTime<maxJumpTime:$AnimatedSprite2D.frame=2
 		velocity += get_gravity() * delta
+		$AnimatedSprite2D.stop()
+		$AnimatedSprite2D.frame=0
 		if not started_timer:
 			$coyoteTimer.start()
 			started_timer=true
@@ -31,7 +36,7 @@ func _physics_process(delta: float) -> void:
 		#$AnimatedSprite2D.frame=0
 		if velocity.x!=0:
 			$AnimatedSprite2D.play()
-			$AnimatedSprite2D.speed_scale=absf(velocity.x/300)
+			$AnimatedSprite2D.speed_scale=absf(velocity.x/200)
 		else:
 			$AnimatedSprite2D.stop()
 			$AnimatedSprite2D.frame=0
@@ -67,14 +72,19 @@ func _physics_process(delta: float) -> void:
 		var direction := Input.get_axis("move_left", "move_right")
 		if direction:
 			$AnimatedSprite2D.scale.x=spriteXScale*signf(direction)
+			$Flashlights.scale.x=signf(direction)
 			velocity.x+=direction*ACCEL*delta*(1 if signf(velocity.x)==signf(direction) else 2)
 		else:
 			velocity.x-=minf(ACCEL*2*delta,abs(velocity.x))*signf(velocity.x)
 		velocity.x*=pow(dampening,delta)
 	else:velocity.x=0
 
-	$Label.text=str(velocity)
+	#$Label.text=str(velocity)
 	move_and_slide()
 
 func respawn()->void:
 	pass
+
+func setFlashlightScale(val:float):
+	get_tree().set_group("flashlight","offset",Vector2.ONE*val*16)
+	get_tree().set_group("flashlight","texture_scale",val)
