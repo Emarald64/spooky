@@ -1,10 +1,17 @@
-[gd_scene load_steps=28 format=4 uid="uid://7mpm7e3hccsl"]
+[gd_scene load_steps=31 format=4 uid="uid://7mpm7e3hccsl"]
 
 [ext_resource type="Texture2D" uid="uid://bmxj1wlg48v60" path="res://assets/kenney_pixel-platformer-farm-expansion.png" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://1g8qhg8kax4o" path="res://scenes/main.gd" id="2_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://dy1nbkg26876f" path="res://assets/kenney_pixel-platformer.png" id="2_sugp2"]
 [ext_resource type="Texture2D" uid="uid://d4hbm4hftlwbi" path="res://assets/tombstone.png" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://c12wop8unodi2" path="res://scenes/static_overlay.gd" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://c8njtr1dfwh17" path="res://scenes/player.tscn" id="4_tbgi4"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0ld40"]
+polygon = PackedVector2Array(-9, -2.25, 9, -2.25, 9, 9, -9, 9)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gqmmt"]
+polygon = PackedVector2Array(-9, -2.25, 9, -2.25, 9, 9, -9, 9)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_muem4"]
 polygon = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
@@ -13,7 +20,7 @@ polygon = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
 polygon = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jkv2x"]
-polygon = PackedVector2Array(-6.75, -6.75, 6.75, -6.75, 6.75, 6.75, -6.75, 6.75)
+polygon = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tefeu"]
 polygon = PackedVector2Array(-6.75, -6.75, 6.75, -6.75, 6.75, 9, -6.75, 9)
@@ -22,7 +29,7 @@ polygon = PackedVector2Array(-6.75, -6.75, 6.75, -6.75, 6.75, 9, -6.75, 9)
 polygon = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_o6xl0"]
-polygon = PackedVector2Array(-6.75, -6.75, 9, -6.75, 9, 9, -6.75, 9)
+polygon = PackedVector2Array(-6, -6, 9, -6, 9, 9, -6, 9)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tipki"]
 polygon = PackedVector2Array(-6.75, -9, 9, -9, 9, 9, -6.75, 9)
@@ -34,7 +41,7 @@ polygon = PackedVector2Array(-6.75, -9, 9, -9, 9, 6.75, -6.75, 6.75)
 polygon = PackedVector2Array(-9, -9, 9, -9, 9, 6.75, -9, 6.75)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_choun"]
-polygon = PackedVector2Array(-9, -6.75, 9, -6.75, 9, 9, -9, 9)
+polygon = PackedVector2Array(-9, -6, 9, -6, 9, 9, -9, 9)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ya4ey"]
 polygon = PackedVector2Array(-9, -9, 9, -9, 9, 6.75, -9, 6.75)
@@ -56,31 +63,31 @@ use_texture_padding = false
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 0
-0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_muem4")
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_0ld40")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
 1:0/0 = 0
 1:0/0/terrain_set = 0
 1:0/0/terrain = 0
-1:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_muem4")
+1:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_0ld40")
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
 1:0/0/terrains_peering_bit/right_side = 0
 2:0/0 = 0
 2:0/0/terrain_set = 0
 2:0/0/terrain = 0
-2:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_muem4")
+2:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_0ld40")
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
 2:0/0/terrains_peering_bit/right_side = 0
 2:0/0/terrains_peering_bit/left_side = 0
 3:0/0 = 0
 3:0/0/terrain_set = 0
 3:0/0/terrain = 0
-3:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_muem4")
+3:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_0ld40")
 3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
 3:0/0/terrains_peering_bit/left_side = 0
 3:1/0 = 0
 3:1/0/terrain_set = 0
 3:1/0/terrain = 0
-3:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_muem4")
+3:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_gqmmt")
 3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
 3:1/0/terrains_peering_bit/bottom_side = 0
 3:1/0/terrains_peering_bit/bottom_left_corner = 0
@@ -137,13 +144,13 @@ use_texture_padding = false
 0:1/0 = 0
 0:1/0/terrain_set = 0
 0:1/0/terrain = 0
-0:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_muem4")
+0:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_gqmmt")
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
 0:1/0/terrains_peering_bit/bottom_side = 0
 1:1/0 = 0
 1:1/0/terrain_set = 0
 1:1/0/terrain = 0
-1:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_muem4")
+1:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_gqmmt")
 1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
 1:1/0/terrains_peering_bit/right_side = 0
 1:1/0/terrains_peering_bit/bottom_right_corner = 0
@@ -151,7 +158,7 @@ use_texture_padding = false
 2:1/0 = 0
 2:1/0/terrain_set = 0
 2:1/0/terrain = 0
-2:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_muem4")
+2:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_gqmmt")
 2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
 2:1/0/terrains_peering_bit/right_side = 0
 2:1/0/terrains_peering_bit/bottom_right_corner = 0
@@ -469,6 +476,7 @@ generate_mipmaps = false
 noise = SubResource("FastNoiseLite_tefeu")
 
 [node name="main" type="Node2D"]
+script = ExtResource("2_o6xl0")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 texture_filter = 1
@@ -479,6 +487,11 @@ navigation_enabled = false
 
 [node name="player" parent="." instance=ExtResource("4_tbgi4")]
 position = Vector2(441, 335)
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+limit_enabled = false
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [node name="static overlay" type="CanvasLayer" parent="."]
 script = ExtResource("3_sugp2")
@@ -497,6 +510,4 @@ centered = false
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-z_index = -100
-polygon = PackedVector2Array(0, 0, 1152, 0, 1152, 648, 0, 647)
+[node name="StartPos" type="Node2D" parent="."]

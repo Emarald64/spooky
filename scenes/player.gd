@@ -8,8 +8,10 @@ const dampening:=0.15
 
 var hasjumped:=false
 var started_timer:=false
-var deathCount:=0
+var deaths:=0
 var jumpTime:=0.0
+@onready var checkpoint:Node2D=get_node('../StartPos')
+
 const maxJumpTime=0.125
 const spriteXScale:=0.33
 
@@ -17,7 +19,7 @@ var animating:=false
 
 
 func  _process(_delta: float) -> void:
-	$Flashlights.rotation=(Input.get_axis("look_up","look_down")*PI/4)
+	$Flashlights.rotation=(Input.get_axis("look_up","look_down")*PI/4)*(1 if $Flashlights.scale.x==1 else -1)
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("reset") and not animating:
@@ -53,7 +55,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if not animating and ((Input.is_action_pressed("jump") and jumpTime<0.1) or (Input.is_action_just_pressed("jump") and (not $coyoteTimer.is_stopped() or is_on_floor()))):
 		if not hasjumped:
-			$"Jump Sound".play()
+			playJumpSound()
 			#$AnimatedSprite2D.frame=1
 		$coyoteTimer.stop()
 		if not hasjumped:
@@ -82,9 +84,37 @@ func _physics_process(delta: float) -> void:
 	#$Label.text=str(velocity)
 	move_and_slide()
 
-func respawn()->void:
-	pass
+func respawn() -> void:
+	if not animating:
+		# set flag
+		animating=true
+		# play sfx
+		#$SoundPlayer.stream=preload("res://assets/sfx/hurt.wav")
+		#$SoundPlayer.play()
+		# shake camera
+		get_node('../Camera2D').add_trauma(0.3)
+		
+		# Stop walking animation
+		$Sprite2D.speed_scale=0.0
+		
+		# Update ending text
+		deaths+=1
+		#get_node("/root/main/Control/Deaths").text="Deaths: "+str(deaths)
+		
+		# wait for 0.5 seconds
+		await get_tree().create_timer(0.5).timeout
+		
+		# move to checkpoint
+		position=checkpoint.global_position
+		
+		get_tree().call_group("reset on death","reset")
+		# reset respawn flag
+		animating=false
 
 func setFlashlightScale(val:float):
 	get_tree().set_group("flashlight","offset",Vector2.ONE*val*16)
 	get_tree().set_group("flashlight","texture_scale",val)
+
+func playJumpSound()->void:
+	$SoundPlayer.stream=[preload("res://assets/sfx/jump1.wav"),preload("res://assets/sfx/jump2.wav")].pick_random()
+	$SoundPlayer.play()
