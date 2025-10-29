@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Spooky"
+run/main_scene="uid://7mpm7e3hccsl"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -21,7 +22,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
+enabled=PackedStringArray()
 
 [rendering]
 
