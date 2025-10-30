@@ -105,9 +105,11 @@ func respawn() -> void:
 		# reset respawn flag
 		animating=false
 
-func setFlashlightScale(val:float):
+func setFlashlightScale(val:float, includePlayerLight:=false):
 	get_tree().set_group("flashlight","offset",Vector2.ONE*val*32)
 	get_tree().set_group("flashlight","texture_scale",val)
+	if includePlayerLight:
+		$PointLight2D3.texture_scale=val/2
 
 func playJumpSound()->void:
 	$SoundPlayer.stream=[preload("res://assets/sfx/jump1.wav"),preload("res://assets/sfx/jump2.wav")].pick_random()
