@@ -45,12 +45,6 @@ func _physics_process(delta: float) -> void:
 		hasjumped=false
 		started_timer=false
 		$coyoteTimer.stop()
-		
-	#if not animating and$Collect.has_overlapping_areas() and $Collect.get_overlapping_areas()[0].has_meta("animation"):
-		#$"Interact Prompt".show()
-		#if Input.is_action_just_pressed("jump"):
-			#get_node("../AnimationPlayer").play($Collect.get_overlapping_areas()[0].get_meta("animation"))
-	#else:$"Interact Prompt".hide()
 			
 	# Handle jump.
 	if not animating and ((Input.is_action_pressed("jump") and jumpTime<0.1) or (Input.is_action_just_pressed("jump") and (not $coyoteTimer.is_stopped() or is_on_floor()))):
@@ -112,7 +106,7 @@ func respawn() -> void:
 		animating=false
 
 func setFlashlightScale(val:float):
-	get_tree().set_group("flashlight","offset",Vector2.ONE*val*16)
+	get_tree().set_group("flashlight","offset",Vector2.ONE*val*32)
 	get_tree().set_group("flashlight","texture_scale",val)
 
 func playJumpSound()->void:

@@ -1,7 +1,7 @@
 [gd_scene load_steps=31 format=4 uid="uid://7mpm7e3hccsl"]
 
 [ext_resource type="Texture2D" uid="uid://bmxj1wlg48v60" path="res://assets/kenney_pixel-platformer-farm-expansion.png" id="1_0wfyh"]
-[ext_resource type="Script" uid="uid://1g8qhg8kax4o" path="res://scenes/main.gd" id="2_o6xl0"]
+[ext_resource type="Script" uid="uid://tw2a2pighwg5" path="res://scenes/main.gd" id="2_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://dy1nbkg26876f" path="res://assets/kenney_pixel-platformer.png" id="2_sugp2"]
 [ext_resource type="Texture2D" uid="uid://d4hbm4hftlwbi" path="res://assets/tombstone.png" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://c12wop8unodi2" path="res://scenes/static_overlay.gd" id="3_sugp2"]
