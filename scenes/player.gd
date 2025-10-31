@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 const ACCEL = 1000
-const JUMP_VELOCITY = -375
+const JUMP_VELOCITY = -400
 const dampening:=0.15
 #const maxSpeed:=1000
 
