@@ -1,19 +1,85 @@
-[gd_scene load_steps=4 format=3 uid="uid://cejwsghl1wayf"]
+[gd_scene load_steps=7 format=3 uid="uid://cejwsghl1wayf"]
 
 [ext_resource type="Script" uid="uid://ctbrmpc82k3k2" path="res://scenes/ghost.gd" id="1_l5lq6"]
 [ext_resource type="Texture2D" uid="uid://bjsn5qy6kaue7" path="res://assets/ghost.svg" id="1_t76o2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t76o2"]
-radius = 72.00694
+radius = 20.0
+
+[sub_resource type="Animation" id="Animation_l5lq6"]
+resource_name = "fadeOut"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_bbnym"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_veat2"]
+_data = {
+&"RESET": SubResource("Animation_bbnym"),
+&"fadeOut": SubResource("Animation_l5lq6")
+}
 
 [node name="Ghost" type="Area2D" groups=["reset on death"]]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 0
+monitoring = false
+monitorable = false
 script = ExtResource("1_l5lq6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
+modulate = Color(1, 1, 1, 0.19607843)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_t76o2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_t76o2")
+
+[node name="WakeUp" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_veat2")
+}
+
+[connection signal="timeout" from="WakeUp" to="." method="_on_wake_up_timeout"]

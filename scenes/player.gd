@@ -20,6 +20,8 @@ const spriteXScale:=0.33
 
 var animating:=false
 
+func _draw():
+	draw_circle(Vector2.ZERO,500,Color.RED,false)
 
 func  _process(_delta: float) -> void:
 	$Flashlights.rotation=(Input.get_axis("look_up","look_down")*PI/4)*(1 if $Flashlights.scale.x==1 else -1)
@@ -53,6 +55,9 @@ func _physics_process(delta: float) -> void:
 	if not animating and ((Input.is_action_pressed("jump") and jumpTime<0.1) or (Input.is_action_just_pressed("jump") and (not $coyoteTimer.is_stopped() or is_on_floor()))):
 		if not hasjumped:
 			playJumpSound()
+			for area in $hurtbox.get_overlapping_areas():
+				if area.get_collision_layer_value(4):
+					area.spawnGhost()
 			#$AnimatedSprite2D.frame=1
 		$coyoteTimer.stop()
 		if not hasjumped:
@@ -120,3 +125,8 @@ func setFlashlightScale(val:float):
 func playJumpSound()->void:
 	$SoundPlayer.stream=[preload("res://assets/sfx/jump1.wav"),preload("res://assets/sfx/jump2.wav")].pick_random()
 	$SoundPlayer.play()
+
+
+func hurtbox_entered(area: Area2D) -> void:
+	if area.get_collision_layer_value(2):
+		respawn()

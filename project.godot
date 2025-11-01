@@ -31,6 +31,7 @@ enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 [global_group]
 
 "reset on death"=""
+"disable when ghost"=""
 
 [input]
 
@@ -74,6 +75,7 @@ look_down={
 2d_physics/layer_1="wall"
 2d_physics/layer_2="hurt"
 2d_physics/layer_3="player"
+2d_physics/layer_4="ghost spawning"
 
 [physics]
 
