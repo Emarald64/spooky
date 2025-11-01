@@ -10,7 +10,10 @@ var hasjumped:=false
 var started_timer:=false
 var deaths:=0
 var jumpTime:=0.0
+
 @onready var checkpoint:Node2D=get_node('../StartPos')
+var checkpointModulate:=0.9
+var checkpointFlashlightBrightness:=0.0
 
 const maxJumpTime=0.125
 const spriteXScale:=0.33
@@ -83,13 +86,13 @@ func respawn() -> void:
 		# set flag
 		animating=true
 		# play sfx
-		#$SoundPlayer.stream=preload("res://assets/sfx/hurt.wav")
-		#$SoundPlayer.play()
+		$SoundPlayer.stream=preload("res://assets/sfx/hurt.wav")
+		$SoundPlayer.play()
 		# shake camera
-		get_node('../Camera2D').add_trauma(0.3)
+		get_node('Camera2D').add_trauma(0.3)
 		
 		# Stop walking animation
-		$Sprite2D.speed_scale=0.0
+		$AnimatedSprite2D.speed_scale=0.0
 		
 		# Update ending text
 		deaths+=1
@@ -101,15 +104,18 @@ func respawn() -> void:
 		# move to checkpoint
 		position=checkpoint.global_position
 		
+		# reset lights
+		get_parent().setModulateBrighness(checkpointModulate)
+		setFlashlightScale(checkpointFlashlightBrightness)
+		
 		get_tree().call_group("reset on death","reset")
 		# reset respawn flag
 		animating=false
 
-func setFlashlightScale(val:float, includePlayerLight:=false):
+func setFlashlightScale(val:float):
 	get_tree().set_group("flashlight","offset",Vector2.ONE*val*32)
 	get_tree().set_group("flashlight","texture_scale",val)
-	if includePlayerLight:
-		$PointLight2D3.texture_scale=val/2
+	$PointLight2D3.texture_scale=val/2
 
 func playJumpSound()->void:
 	$SoundPlayer.stream=[preload("res://assets/sfx/jump1.wav"),preload("res://assets/sfx/jump2.wav")].pick_random()

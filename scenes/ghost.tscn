@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cejwsghl1wayf"]
+
+[ext_resource type="Script" uid="uid://ctbrmpc82k3k2" path="res://scenes/ghost.gd" id="1_l5lq6"]
+[ext_resource type="Texture2D" uid="uid://bjsn5qy6kaue7" path="res://assets/ghost.svg" id="1_t76o2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t76o2"]
+radius = 72.00694
+
+[node name="Ghost" type="Area2D" groups=["reset on death"]]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_l5lq6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_t76o2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_t76o2")
