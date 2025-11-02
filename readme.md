@@ -1,6 +1,6 @@
 # Spooky Platformer
 
-![hackatime](https://hackatime-badge.hackclub.com/U0785D5VDEK/gravity-switcher)
+![hackatime](https://hackatime-badge.hackclub.com/U0785D5VDEK/spooky)
 
 A platformer game with spooky ghosts and dark lighting
 
