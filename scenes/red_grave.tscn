@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://0m8mijlvl6vw"]
+
+[ext_resource type="PackedScene" uid="uid://0puwqrnafdp1" path="res://scenes/grave.tscn" id="1_cm7da"]
+[ext_resource type="PackedScene" uid="uid://cfhwcgkmkg4t2" path="res://scenes/red_ghost.tscn" id="2_otyns"]
+
+[node name="RedGrave" instance=ExtResource("1_cm7da")]
+ghostScene = ExtResource("2_otyns")
+
+[node name="Sprite2D" parent="." index="0"]
+self_modulate = Color(1, 0.120000005, 0.120000005, 1)

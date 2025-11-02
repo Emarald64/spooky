@@ -10,6 +10,7 @@ func spawnGhost():
 		var ghost=ghostScene.instantiate()
 		ghost.get_node("Sprite2D").scale.x*=signf(get_node('/root/main/player').global_position.x-global_position.x)
 		ghost.position=global_position
+		ghost.grave=self
 		get_node('/root/main').add_child(ghost)
 		canSpawnGhost=false
 

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfhwcgkmkg4t2"]
+
+[ext_resource type="PackedScene" uid="uid://cejwsghl1wayf" path="res://scenes/ghost.tscn" id="1_g0vhl"]
+
+[node name="RedGhost" groups=["Removed by cleaner"] instance=ExtResource("1_g0vhl")]
+despawnRadius = 16777216
+
+[node name="Sprite2D" parent="." index="0"]
+self_modulate = Color(1, 0.17000002, 0.17000002, 1)
+
+[node name="GPUParticles2D" parent="." index="4"]
+emitting = false

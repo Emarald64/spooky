@@ -20,8 +20,8 @@ const spriteXScale:=0.33
 
 var animating:=false
 
-func _draw():
-	draw_circle(Vector2.ZERO,500,Color.RED,false)
+#func _draw():
+	#draw_circle(Vector2.ZERO,500,Color.RED,false)
 
 func  _process(_delta: float) -> void:
 	$Flashlights.rotation=(Input.get_axis("look_up","look_down")*PI/4)*(1 if $Flashlights.scale.x==1 else -1)

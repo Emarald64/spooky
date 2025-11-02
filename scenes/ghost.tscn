@@ -1,10 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://cejwsghl1wayf"]
+[gd_scene load_steps=9 format=3 uid="uid://cejwsghl1wayf"]
 
 [ext_resource type="Script" uid="uid://ctbrmpc82k3k2" path="res://scenes/ghost.gd" id="1_l5lq6"]
 [ext_resource type="Texture2D" uid="uid://bjsn5qy6kaue7" path="res://assets/ghost.svg" id="1_t76o2"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_l5lq6"]
+light_mode = 1
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_t76o2"]
 radius = 20.0
+
+[sub_resource type="Animation" id="Animation_bbnym"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_l5lq6"]
 resource_name = "fadeOut"
@@ -36,26 +54,23 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_bbnym"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_veat2"]
 _data = {
 &"RESET": SubResource("Animation_bbnym"),
 &"fadeOut": SubResource("Animation_l5lq6")
 }
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l5lq6"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 500.0
+emission_ring_inner_radius = 495.0
+emission_ring_cone_angle = 90.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
 
 [node name="Ghost" type="Area2D" groups=["reset on death"]]
 collision_layer = 2
@@ -66,6 +81,7 @@ script = ExtResource("1_l5lq6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.19607843)
+material = SubResource("CanvasItemMaterial_l5lq6")
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_t76o2")
 
@@ -81,5 +97,12 @@ autostart = true
 libraries = {
 &"": SubResource("AnimationLibrary_veat2")
 }
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 192
+preprocess = 1.0
+visibility_rect = Rect2(-500, -500, 1000, 1000)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_l5lq6")
 
 [connection signal="timeout" from="WakeUp" to="." method="_on_wake_up_timeout"]

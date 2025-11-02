@@ -81,6 +81,7 @@ texture = SubResource("GradientTexture2D_dqkch")
 texture_scale = 3.0
 
 [node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
 
 [node name="hurtbox" type="Area2D" parent="."]
 collision_layer = 4
