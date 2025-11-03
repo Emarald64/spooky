@@ -2,7 +2,7 @@ extends Area2D
 
 func disable()->void:
 	monitoring=false
-	$Sprite2D.modulate=Color(0.2,0.2,0.2)
+	$Sprite2D.modulate=Color(0.5,0.5,0.5)
 	
 func enable()->void:
 	monitoring=true

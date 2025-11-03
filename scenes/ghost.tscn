@@ -65,8 +65,8 @@ particle_flag_disable_z = true
 emission_shape = 6
 emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
-emission_ring_radius = 500.0
-emission_ring_inner_radius = 495.0
+emission_ring_radius = 400.0
+emission_ring_inner_radius = 395.0
 emission_ring_cone_angle = 90.0
 gravity = Vector3(0, 0, 0)
 scale_min = 4.0
@@ -78,6 +78,7 @@ collision_mask = 0
 monitoring = false
 monitorable = false
 script = ExtResource("1_l5lq6")
+despawnRadius = 400
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.19607843)

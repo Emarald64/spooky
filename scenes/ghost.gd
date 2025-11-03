@@ -2,6 +2,8 @@ class_name Ghost extends Area2D
 
 const SPEED=150
 const spriteXScale=0.1
+const turningSpeed=1
+
 static var ghostCount:=0
 @export var despawnRadius:=500
 var grave:Area2D
@@ -16,9 +18,10 @@ func _ready()->void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if not animating:
-		if get_node('/root/main/player').global_position.distance_squared_to(global_position)<500**2:
-			$Sprite2D.scale.x=spriteXScale*signf(get_node('/root/main/player').global_position.x-global_position.x)
-			position+=delta*SPEED*(get_node('/root/main/player').global_position-global_position).normalized()
+		if get_node('/root/main/player').global_position.distance_squared_to(global_position)<despawnRadius**2:
+			if global_position.distance_squared_to(get_node('/root/main/player').global_position)>400:
+				$Sprite2D.scale.x=clampf($Sprite2D.scale.x+(turningSpeed*delta*signf(get_node('/root/main/player').global_position.x-global_position.x)),-spriteXScale,spriteXScale)
+				position+=delta*SPEED*(get_node('/root/main/player').global_position-global_position).normalized()
 		else:
 			reset()
 
@@ -27,7 +30,7 @@ func reset()->void:
 	$AnimationPlayer.play("fadeOut")
 	set_deferred('monitorable',false)
 	ghostCount-=1
-	grave.canSpawnGhost=true
+	grave.reset()
 	if ghostCount==0:
 		get_tree().call_group("disable when ghost",'enable')
 

@@ -1,4 +1,4 @@
-extends Area2D
+class_name Checkpoint extends Area2D
 
 var active:=false
 var enabled:=true
@@ -6,6 +6,8 @@ var enabled:=true
 func _on_area_entered(playerHitbox: Area2D) -> void:
 	if not active and enabled:
 		var player=playerHitbox.get_parent()
+		if player.checkpoint is Checkpoint:
+			player.checkpoint.deactivate()
 		player.checkpoint=self
 		player.checkpointFlashlightBrightness=playerHitbox.get_node('../Flashlights/Flashlight').texture_scale
 		player.checkpointModulate=get_node('/root/main/CanvasModulate').color.r
@@ -21,7 +23,7 @@ func deactivate()->void:
 	
 func disable()->void:
 	enabled=false
-	$AnimatedSprite2D.modulate=Color(0.2,0.2,0.2)
+	$AnimatedSprite2D.modulate=Color(0.5,0.5,0.5)
 	
 func enable()->void:
 	enabled=true

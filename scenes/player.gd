@@ -55,6 +55,7 @@ func _physics_process(delta: float) -> void:
 	if not animating and ((Input.is_action_pressed("jump") and jumpTime<0.1) or (Input.is_action_just_pressed("jump") and (not $coyoteTimer.is_stopped() or is_on_floor()))):
 		if not hasjumped:
 			playJumpSound()
+			get_parent().startTimer()
 			for area in $hurtbox.get_overlapping_areas():
 				if area.get_collision_layer_value(4):
 					area.spawnGhost()
@@ -75,16 +76,16 @@ func _physics_process(delta: float) -> void:
 		#if not is_on_floor():velocity.y+=Input.get_axis("move_up", "move_down")*200*delta
 		var direction := Input.get_axis("move_left", "move_right")
 		if direction:
+			get_parent().startTimer()
 			$AnimatedSprite2D.scale.x=spriteXScale*signf(direction)
 			$Flashlights.scale.x=signf(direction)
 			velocity.x+=direction*ACCEL*delta*(1 if signf(velocity.x)==signf(direction) else 2)
 		else:
 			velocity.x-=minf(ACCEL*2*delta,abs(velocity.x))*signf(velocity.x)
 		velocity.x*=pow(dampening,delta)
+		move_and_slide()
 	else:velocity.x=0
 
-	#$Label.text=str(velocity)
-	move_and_slide()
 
 func respawn() -> void:
 	if not animating:
@@ -101,7 +102,7 @@ func respawn() -> void:
 		
 		# Update ending text
 		deaths+=1
-		#get_node("/root/main/Control/Deaths").text="Deaths: "+str(deaths)
+		get_node("/root/main/End Area/Deaths").text="Deaths: "+str(deaths)
 		
 		# wait for 0.5 seconds
 		await get_tree().create_timer(0.5).timeout

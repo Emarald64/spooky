@@ -33,6 +33,7 @@ texture = ExtResource("1_qpo7b")
 shape = SubResource("CircleShape2D_mlivn")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -1
 amount = 64
 preprocess = 1.0
 process_material = SubResource("ParticleProcessMaterial_inmiy")

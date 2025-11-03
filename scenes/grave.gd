@@ -13,7 +13,9 @@ func spawnGhost():
 		ghost.grave=self
 		get_node('/root/main').add_child(ghost)
 		canSpawnGhost=false
+		$GPUParticles2D.emitting=false
 
 func reset():
 	# allow spawning a ghost again
 	canSpawnGhost=true
+	$GPUParticles2D.emitting=true

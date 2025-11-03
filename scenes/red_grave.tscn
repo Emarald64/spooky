@@ -1,10 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://0m8mijlvl6vw"]
+[gd_scene load_steps=4 format=3 uid="uid://0m8mijlvl6vw"]
 
 [ext_resource type="PackedScene" uid="uid://0puwqrnafdp1" path="res://scenes/grave.tscn" id="1_cm7da"]
 [ext_resource type="PackedScene" uid="uid://cfhwcgkmkg4t2" path="res://scenes/red_ghost.tscn" id="2_otyns"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_otyns"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 50.0
+emission_ring_inner_radius = 48.0
+emission_ring_cone_angle = 90.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+color = Color(1, 0, 0, 1)
 
 [node name="RedGrave" instance=ExtResource("1_cm7da")]
 ghostScene = ExtResource("2_otyns")
 
 [node name="Sprite2D" parent="." index="0"]
 self_modulate = Color(1, 0.120000005, 0.120000005, 1)
+
+[node name="GPUParticles2D" parent="." index="2"]
+process_material = SubResource("ParticleProcessMaterial_otyns")
