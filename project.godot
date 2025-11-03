@@ -13,7 +13,7 @@ config_version=5
 config/name="Spooky"
 run/main_scene="uid://7mpm7e3hccsl"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://bq4y3tim0d4ex"
 
 [display]
 
