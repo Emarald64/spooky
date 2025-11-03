@@ -20,9 +20,6 @@ func startTimer()->void:
 		startTime=Time.get_ticks_msec()
 		startedTimer=true
 
-func _process(delta: float) -> void:
-	print((Time.get_ticks_msec()-startTime)/1000.0)
-
 func stopTimer()->void:
 	$"End Area/Time".text="Time: "+formatTime((Time.get_ticks_msec()-startTime)/1000.0)
 
